@@ -27,8 +27,11 @@ fetch(url, { headers: { "user-key": apiKey } })
   <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>  
   <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
   <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
+  <li> Avarage price-range: ${chineseRestaurant.restaurant.price_range}</li>
+  <li> Online delivery: ${chineseRestaurant.restaurant.has_online_delivery}</li>
+  <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
   <li><img src=${chineseRestaurant.restaurant.photos[0].photo.thumb_url}></li>  
 `;
-            console.log(chineseRestaurant.restaurant)
+            console.log(chineseRestaurant.restaurant.has_online_delivery)
         });
     });
