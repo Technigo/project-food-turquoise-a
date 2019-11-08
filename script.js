@@ -20,21 +20,18 @@ const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&e
 const urlSortOnPrice = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}&sort=cost&order=asc`
 const urlSortOnRating = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}&sort=rating&order=desc`
 
-
-const theRestaurantSection = document.getElementById("restaurant-section")
-
 // SCROLL HEADER SECTION
-window.onscroll = function() { scrollFunction() };
+window.onscroll = function () { scrollFunction() };
 
 const header = document.getElementById("scrollHeader");
 const sticky = header.offsetTop;
 
 function scrollFunction() {
-    if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-    } else {
-        header.classList.remove("sticky");
-    }
+  if (window.pageYOffset > sticky) {
+    header.classList.add("sticky");
+  } else {
+    header.classList.remove("sticky");
+  }
 }
 
 renderImage = (restaurant) => {
@@ -67,38 +64,31 @@ showDeliveryRestaurants = (restaurant) => {
 }
 
 showBookingRestaurants = (restaurant) => {
-    if (restaurant.has_table_booking > 0) {
-        return "Has"
-    } else {
-        return "No"
-    }
+  if (restaurant.has_table_booking > 0) {
+    return "Has"
+  } else {
+    return "No"
+  }
 }
 
 fetch(url, { headers: { "user-key": apiKey } })
-
-    .then(response => response.json())
-    .then(json => {
-        console.log(json);
-        json.restaurants.forEach(chineseRestaurant => {
-            theRestaurantSection.innerHTML += ` 
 
   .then(response => response.json())
   .then(json => {
     console.log(json);
     json.restaurants.forEach(chineseRestaurant => {
-      // console.log(chineseRestaurant.restaurant.name);
-      theRestaurantSection.innerHTML += ` 
-  <li>${renderImage(chineseRestaurant.restaurant)}</li>  
-  <li>Name: ${chineseRestaurant.restaurant.name}</li>
-  <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>  
-  <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
-  <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
-  <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
-  <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
-  <li> ${showBookingRestaurants(chineseRestaurant.restaurant)} table booking</li>
-`;
-    });
-  });
+      theRestaurantSection.innerHTML += `
+      <li> ${renderImage(chineseRestaurant.restaurant)}</li>
+          <li>Name: ${chineseRestaurant.restaurant.name}</li>
+          <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>
+          <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
+          <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
+          <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
+          <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
+          <li> ${showBookingRestaurants(chineseRestaurant.restaurant)} table booking</li>
+`
+    })
+  })
 
 
 fetch(urlSortOnPrice, { headers: { "user-key": apiKey } })
@@ -108,15 +98,15 @@ fetch(urlSortOnPrice, { headers: { "user-key": apiKey } })
       theRestaurantSection.innerHTML = ''
       json.restaurants.forEach(chineseRestaurant => {
 
-        theRestaurantSection.innerHTML += ` 
-        <li>${renderImage(chineseRestaurant.restaurant)}</li>  
-        <li>Name: ${chineseRestaurant.restaurant.name}</li>
-        <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>  
-        <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
-        <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
-        <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
-        <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
-        <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
+        theRestaurantSection.innerHTML += `
+        <li> ${renderImage(chineseRestaurant.restaurant)}</li>
+          <li>Name: ${chineseRestaurant.restaurant.name}</li>
+          <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>
+          <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
+          <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
+          <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
+          <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
+          <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
       `
 
       })
@@ -131,15 +121,15 @@ fetch(urlSortOnRating, { headers: { "user-key": apiKey } })
       theRestaurantSection.innerHTML = ''
       json.restaurants.forEach(chineseRestaurant => {
 
-        theRestaurantSection.innerHTML += ` 
-        <li>${renderImage(chineseRestaurant.restaurant)}</li>  
-        <li>Name: ${chineseRestaurant.restaurant.name}</li>
-        <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>  
-        <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
-        <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
-        <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
-        <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
-        <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
+        theRestaurantSection.innerHTML += `
+        <li> ${ renderImage(chineseRestaurant.restaurant)}</li>
+          <li>Name: ${chineseRestaurant.restaurant.name}</li>
+          <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>
+          <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
+          <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
+          <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
+          <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
+          <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
       `
 
       })
