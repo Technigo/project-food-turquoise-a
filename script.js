@@ -16,19 +16,37 @@ const hasOnlineDevliery = chineseRestaurant.restaurant.has_online_delivery
 
 const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}`
 
+renderImage = (restaurant) => {
+  if (restaurant.photos && restaurant.photos.length > 0) {
+    return `<img src=${restaurant.photos[0].photo.thumb_url}>`
+  } else {
+    return ""
+  }
+}
+
+rangeToDollar = (restaurant) => {
+  if (restaurant.price_range === 1 || restaurant.price_range === 2) {
+    return "$"
+  } else if (restaurant.price_range === 3 || restaurant.price_range === 4) {
+    return "$$"
+  } else if (restaurant.price_range === 5) {
+    return "$$$"
+  }
+}
 
 fetch(url, { headers: { "user-key": apiKey } })
-    .then(response => response.json())
-    .then(json => {
-        console.log(json);
-        json.restaurants.forEach(chineseRestaurant => {
-            console.log(chineseRestaurant.restaurant.name);
-            document.getElementById("restaurant-section").innerHTML += ` 
+  .then(response => response.json())
+  .then(json => {
+    console.log(json);
+    json.restaurants.forEach(chineseRestaurant => {
+      // console.log(chineseRestaurant.restaurant.name);
+      document.getElementById("restaurant-section").innerHTML += ` 
+  <li>${renderImage(chineseRestaurant.restaurant)}</li>  
   <li>Name: ${chineseRestaurant.restaurant.name}</li>
   <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>  
   <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
   <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
-  <li> Avarage price-range: ${chineseRestaurant.restaurant.price_range}</li>
+  <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
   <li> Online delivery: ${chineseRestaurant.restaurant.has_online_delivery}</li>
   <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
   <li><img src=${chineseRestaurant.restaurant.photos[0].photo.thumb_url}></li>  
@@ -49,3 +67,8 @@ const showDeliveryRestaurants = () => {
     }
 }
 showDeliveryRestaurants()
+  <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>`;
+      // console.log(chineseRestaurant.restaurant.has_online_delivery)
+
+    });
+  });
