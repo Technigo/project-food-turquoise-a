@@ -70,7 +70,6 @@ fetch(url, { headers: { "user-key": apiKey } })
     .then(json => {
         console.log(json);
         json.restaurants.forEach(chineseRestaurant => {
-            // console.log(chineseRestaurant.restaurant.name);
             document.getElementById("restaurant-section").innerHTML += ` 
   <li>${renderImage(chineseRestaurant.restaurant)}</li>  
   <li>Name: ${chineseRestaurant.restaurant.name}</li>
