@@ -12,6 +12,7 @@ const cityId = 257; //Rome
 const cuisineId = 25; //Chinese
 const resultQuantity = 20;
 
+const theRestaurantSection = document.getElementById("restaurant-section")
 
 const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}`
 
@@ -24,14 +25,26 @@ renderImage = (restaurant) => {
 }
 
 rangeToDollar = (restaurant) => {
-    if (restaurant.price_range === 1 || restaurant.price_range === 2) {
-        return "$"
-    } else if (restaurant.price_range === 3 || restaurant.price_range === 4) {
-        return "$$"
-    } else if (restaurant.price_range === 5) {
-        return "$$$"
+        if (restaurant.price_range === 1 || restaurant.price_range === 2) {
+            return "$"
+        } else if (restaurant.price_range === 3 || restaurant.price_range === 4) {
+            return "$$"
+        } else if (restaurant.price_range === 5) {
+            return "$$$"
+        }
+    }
+    //filter if the restaurant has online delivery.
+    //Make it so your users can choose to only show resturants 
+    //which have delivery (has_online_delivery) or can be booked in advance (has_table_booking).
+
+showDeliveryRestaurants = (restaurant) => {
+    if (restaurant.has_online_delivery > 0) {
+        return "Has"
+    } else {
+        return "No"
     }
 }
+
 
 fetch(url, { headers: { "user-key": apiKey } })
     .then(response => response.json())
@@ -46,21 +59,8 @@ fetch(url, { headers: { "user-key": apiKey } })
   <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
   <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
   <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
-  <li> Online delivery: ${chineseRestaurant.restaurant.has_online_delivery}</li>
+  <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
   <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
-  <li><img src=${chineseRestaurant.restaurant.photos[0].photo.thumb_url}></li>  
 `;
-            const theRestaurantSection = document.getElementById("restaurant-section")
-                //filter if the restaurant has online delivery.
-                //Make it so your users can choose to only show resturants 
-                //which have delivery (has_online_delivery) or can be booked in advance (has_table_booking).
-            const showDeliveryRestaurants = () => {
-                if (chineseRestaurant.restaurant.has_online_delivery > 0) {
-                    theRestaurantSection.innerHTML = "ALL RESTAURANTS WITH DELIVERY"
-                } else {
-                    theRestaurantSection.innerHTML = "SORRY NO RESTAURANT"
-                }
-            }
-
         });
     });
