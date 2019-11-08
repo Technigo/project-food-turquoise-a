@@ -73,8 +73,9 @@ fetch(urlSortonPrice, { headers: { "user-key": apiKey } })
   .then(response => response.json())
   .then(json => {
     document.getElementById("sortOnPrice").addEventListener('click', () => {
+      restaurantSection.innerHTML = ''
       json.restaurants.forEach(chineseRestaurant => {
-        restaurantSection.innerHTML = ''
+
         restaurantSection.innerHTML += ` 
         <li>${renderImage(chineseRestaurant.restaurant)}</li>  
         <li>Name: ${chineseRestaurant.restaurant.name}</li>
@@ -84,7 +85,8 @@ fetch(urlSortonPrice, { headers: { "user-key": apiKey } })
         <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
         <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
         <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
-      `;
+      `
+
       })
     })
   })
