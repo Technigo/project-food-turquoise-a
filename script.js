@@ -12,35 +12,34 @@ const cityId = 257; //Rome
 const cuisineId = 25; //Chinese
 const resultQuantity = 20;
 
-const hasOnlineDevliery = chineseRestaurant.restaurant.has_online_delivery
 
 const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}`
 
 renderImage = (restaurant) => {
-  if (restaurant.photos && restaurant.photos.length > 0) {
-    return `<img src=${restaurant.photos[0].photo.thumb_url}>`
-  } else {
-    return ""
-  }
+    if (restaurant.photos && restaurant.photos.length > 0) {
+        return `<img src=${restaurant.photos[0].photo.thumb_url}>`
+    } else {
+        return ""
+    }
 }
 
 rangeToDollar = (restaurant) => {
-  if (restaurant.price_range === 1 || restaurant.price_range === 2) {
-    return "$"
-  } else if (restaurant.price_range === 3 || restaurant.price_range === 4) {
-    return "$$"
-  } else if (restaurant.price_range === 5) {
-    return "$$$"
-  }
+    if (restaurant.price_range === 1 || restaurant.price_range === 2) {
+        return "$"
+    } else if (restaurant.price_range === 3 || restaurant.price_range === 4) {
+        return "$$"
+    } else if (restaurant.price_range === 5) {
+        return "$$$"
+    }
 }
 
 fetch(url, { headers: { "user-key": apiKey } })
-  .then(response => response.json())
-  .then(json => {
-    console.log(json);
-    json.restaurants.forEach(chineseRestaurant => {
-      // console.log(chineseRestaurant.restaurant.name);
-      document.getElementById("restaurant-section").innerHTML += ` 
+    .then(response => response.json())
+    .then(json => {
+        console.log(json);
+        json.restaurants.forEach(chineseRestaurant => {
+            // console.log(chineseRestaurant.restaurant.name);
+            document.getElementById("restaurant-section").innerHTML += ` 
   <li>${renderImage(chineseRestaurant.restaurant)}</li>  
   <li>Name: ${chineseRestaurant.restaurant.name}</li>
   <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>  
@@ -51,24 +50,17 @@ fetch(url, { headers: { "user-key": apiKey } })
   <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
   <li><img src=${chineseRestaurant.restaurant.photos[0].photo.thumb_url}></li>  
 `;
+            const theRestaurantSection = document.getElementById("restaurant-section")
+                //filter if the restaurant has online delivery.
+                //Make it so your users can choose to only show resturants 
+                //which have delivery (has_online_delivery) or can be booked in advance (has_table_booking).
+            const showDeliveryRestaurants = () => {
+                if (chineseRestaurant.restaurant.has_online_delivery > 0) {
+                    theRestaurantSection.innerHTML = "ALL RESTAURANTS WITH DELIVERY"
+                } else {
+                    theRestaurantSection.innerHTML = "SORRY NO RESTAURANT"
+                }
+            }
+
         });
     });
-
-
-const theRestaurantSection = document.getElementById("restaurant-section")
-    //filter if the restaurant has online delivery.
-    //Make it so your users can choose to only show resturants 
-    //which have delivery (has_online_delivery) or can be booked in advance (has_table_booking).
-const showDeliveryRestaurants = () => {
-    if (chineseRestaurant.restaurant.has_online_delivery > 0) {
-        theRestaurantSection.innerHTML = "ALL RESTAURANTS WITH DELIVERY"
-    } else {
-        theRestaurantSection.innerHTML = "SORRY NO RESTAURANT"
-    }
-}
-showDeliveryRestaurants()
-  <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>`;
-      // console.log(chineseRestaurant.restaurant.has_online_delivery)
-
-    });
-  });
