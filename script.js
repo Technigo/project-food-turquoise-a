@@ -12,6 +12,7 @@ const cityId = 257; //Rome
 const cuisineId = 25; //Chinese
 const resultQuantity = 20;
 
+const hasOnlineDevliery = chineseRestaurant.restaurant.has_online_delivery
 
 const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}`
 
@@ -47,9 +48,27 @@ fetch(url, { headers: { "user-key": apiKey } })
   <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
   <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
   <li> Online delivery: ${chineseRestaurant.restaurant.has_online_delivery}</li>
+  <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
+  <li><img src=${chineseRestaurant.restaurant.photos[0].photo.thumb_url}></li>  
+`;
+        });
+    });
+
+
+const theRestaurantSection = document.getElementById("restaurant-section")
+    //filter if the restaurant has online delivery.
+    //Make it so your users can choose to only show resturants 
+    //which have delivery (has_online_delivery) or can be booked in advance (has_table_booking).
+const showDeliveryRestaurants = () => {
+    if (chineseRestaurant.restaurant.has_online_delivery > 0) {
+        theRestaurantSection.innerHTML = "ALL RESTAURANTS WITH DELIVERY"
+    } else {
+        theRestaurantSection.innerHTML = "SORRY NO RESTAURANT"
+    }
+}
+showDeliveryRestaurants()
   <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>`;
       // console.log(chineseRestaurant.restaurant.has_online_delivery)
-
 
     });
   });
