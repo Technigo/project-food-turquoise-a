@@ -1,19 +1,20 @@
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: darkslategrey;
+}
 * {
     margin: 0;
     box-sizing: border-box;
     background: ;
 }
 
-.top-container {
-    background-color: #f1f1f1;
-    padding: 30px;
-    text-align: center;
-}
-
 .header {
     padding: 10px 16px;
-    background: #555;
+    background:#f1f1f1;
     color: #f1f1f1;
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .content {
@@ -29,3 +30,43 @@
 .sticky+.content {
     padding-top: 102px;
 }
+
+.logo{
+  height:100px;
+}
+h1{
+margin-top: 10px;
+color: #555;
+}
+.buttons{
+  display: flex;
+  flex-direction: column;
+}
+button{
+  border: 2px solid darkslategrey;
+  border-radius: 5px;
+  margin: 10px;
+  color: darkslategrey;
+  background-color: #ffece3;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 8px;
+}
+footer{
+  display:flex;
+  justify-content: space-around;
+  font-size: 10px;
+  background: none;
+  align-items: center;
+  margin: 10px 10px 0 10px;
+  }
+  footer img {
+    width: 60px;
+    border-radius: 0;
+    margin: 0 10px;
+  }
+  footer a{
+    text-decoration: none;
+    color:royalblue;
+  }
