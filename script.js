@@ -45,6 +45,13 @@ showDeliveryRestaurants = (restaurant) => {
     }
 }
 
+showBookingRestaurants = (restaurant) => {
+    if (restaurant.has_table_booking > 0) {
+        return "Has"
+    } else {
+        return "No"
+    }
+}
 
 fetch(url, { headers: { "user-key": apiKey } })
     .then(response => response.json())
@@ -60,7 +67,7 @@ fetch(url, { headers: { "user-key": apiKey } })
   <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
   <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
   <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
-  <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
+  <li> ${showBookingRestaurants(chineseRestaurant.restaurant)} table booking</li>
 `;
         });
     });
