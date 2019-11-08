@@ -12,12 +12,30 @@ const cityId = 257; //Rome
 const cuisineId = 25; //Chinese
 const resultQuantity = 20;
 
+const theRestaurantSection = document.getElementById("restaurant-section")
+
+
+
 const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}`
 const urlSortOnPrice = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}&sort=cost&order=asc`
 const urlSortOnRating = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}&sort=rating&order=desc`
 
 
 const theRestaurantSection = document.getElementById("restaurant-section")
+
+// SCROLL HEADER SECTION
+window.onscroll = function() { scrollFunction() };
+
+const header = document.getElementById("scrollHeader");
+const sticky = header.offsetTop;
+
+function scrollFunction() {
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+}
 
 renderImage = (restaurant) => {
   if (restaurant.photos && restaurant.photos.length > 0) {
@@ -57,6 +75,13 @@ showBookingRestaurants = (restaurant) => {
 }
 
 fetch(url, { headers: { "user-key": apiKey } })
+
+    .then(response => response.json())
+    .then(json => {
+        console.log(json);
+        json.restaurants.forEach(chineseRestaurant => {
+            theRestaurantSection.innerHTML += ` 
+
   .then(response => response.json())
   .then(json => {
     console.log(json);
