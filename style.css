@@ -1,85 +1,133 @@
-                * {
-                    margin: 0;
-                    box-sizing: border-box;
-                    background: ;
-                }
-                
-                .top-container {
-                    background-color: #f2dded;
-                    padding: 30px;
-                    height: 250px;
-                    text-align: center;
-                }
-                
-                .header {
-                    padding: 10px 16px;
-                    background: #fff;
-                    color: #000;
-                }
-                
-                .content {
-                    padding: 16px;
-                }
-                
-                .sticky {
-                    position: fixed;
-                    top: 0;
-                    width: 100%;
-                }
-                
-                .sticky+.content {
-                    padding-top: 102px;
-                }
-                
-                .main-container {
-                    background: red;
-                }
-                
-                #restaurant-section {
-                    display: flex;
-                    flex-wrap: wrap;
-                    list-style: none;
-                    background: pink;
-                    align-items: center;
-                }
-                
-                #restaurant-section li {
-                    width: 400px;
-                }
-                
-                #restaurant-section img {
-                    display: inline;
-                }
-                
-                .card {
-                    width: 90%;
-                    background: white;
-                    padding: 20px;
-                    border: solid black 2px;
-                    margin: 5px;
-                    justify-content: center;
-                }
-                
-                @media (min-width: 700px) and (max-width: 999px) {
-                    .card {
-                        width: 30%;
-                        height: 400px;
-                    }
-                    #restaurant-section img {
-                        max-width: 200px;
-                        max-height: 200px;
-                    }
-                    #restaurant-section li {
-                        width: 200px;
-                    }
-                }
-                
-                @media (min-width: 1000px) {
-                    .card {
-                        width: 45%;
-                        height: 550px;
-                    }
-                    #restaurant-section img {
-                        max-height: 350px;
-                    }
-                }
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: darkslategrey;
+}       
+* {
+  margin: 0;
+  box-sizing: border-box;
+  background: ;
+}
+
+.top-container {
+  background-color: #f2dded;
+  padding: 30px;
+  height: 250px;
+  text-align: center;
+}
+
+.header {
+  padding: 10px 16px;
+  background:#f1f1f1;
+  color: #f1f1f1;
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky+.content {
+  padding-top: 102px;
+}
+
+.main-container {
+  background: red;
+}
+
+#restaurant-section {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  background: pink;
+  align-items: center;
+}
+
+#restaurant-section li {
+  width: 400px;
+}
+
+#restaurant-section img {
+  display: inline;
+}
+
+.card {
+width: 90%;
+background: white;
+padding: 20px;
+border: solid black 2px;
+margin: 5px;
+justify-content: center;
+}
+
+.logo{
+height:100px;
+}
+h1{
+margin-top: 10px;
+color: #555;
+}
+.buttons{
+  display: flex;
+  flex-direction: column;
+}
+button{
+  border: 2px solid darkslategrey;
+  border-radius: 5px;
+  margin: 10px;
+  color: darkslategrey;
+  background-color: #ffece3;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 8px;
+}
+footer{
+  display:flex;
+  justify-content: space-around;
+  font-size: 10px;
+  background: none;
+  align-items: center;
+  margin: 10px 10px 0 10px;
+}
+footer img {
+  width: 60px;
+  border-radius: 0;
+  margin: 0 10px;
+}
+footer a{
+  text-decoration: none;
+  color:royalblue;
+}
+
+
+@media (min-width: 700px) and (max-width: 999px) {
+  .card {
+      width: 30%;
+      height: 400px;
+  }
+  #restaurant-section img {
+      max-width: 200px;
+      max-height: 200px;
+  }
+  #restaurant-section li {
+      width: 200px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .card {
+      width: 45%;
+      height: 550px;
+  }
+  #restaurant-section img {
+      max-height: 350px;
+  }
+}
