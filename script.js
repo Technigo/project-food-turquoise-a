@@ -12,12 +12,12 @@ const cityId = 257; //Rome
 const cuisineId = 25; //Chinese
 const resultQuantity = 20;
 
-const theRestaurantSection = document.getElementById("restaurant-section")
-
 const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}`
-const urlSortonPrice = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}&sort=cost&order=asc`
+const urlSortOnPrice = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}&sort=cost&order=asc`
+const urlSortOnRating = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}&sort=rating&order=desc`
 
-const restaurantSection = document.getElementById("restaurant-section")
+
+const theRestaurantSection = document.getElementById("restaurant-section")
 
 renderImage = (restaurant) => {
   if (restaurant.photos && restaurant.photos.length > 0) {
@@ -55,7 +55,7 @@ fetch(url, { headers: { "user-key": apiKey } })
     console.log(json);
     json.restaurants.forEach(chineseRestaurant => {
       // console.log(chineseRestaurant.restaurant.name);
-      restaurantSection.innerHTML += ` 
+      theRestaurantSection.innerHTML += ` 
   <li>${renderImage(chineseRestaurant.restaurant)}</li>  
   <li>Name: ${chineseRestaurant.restaurant.name}</li>
   <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>  
@@ -69,14 +69,14 @@ fetch(url, { headers: { "user-key": apiKey } })
   });
 
 
-fetch(urlSortonPrice, { headers: { "user-key": apiKey } })
+fetch(urlSortOnPrice, { headers: { "user-key": apiKey } })
   .then(response => response.json())
   .then(json => {
     document.getElementById("sortOnPrice").addEventListener('click', () => {
-      restaurantSection.innerHTML = ''
+      theRestaurantSection.innerHTML = ''
       json.restaurants.forEach(chineseRestaurant => {
 
-        restaurantSection.innerHTML += ` 
+        theRestaurantSection.innerHTML += ` 
         <li>${renderImage(chineseRestaurant.restaurant)}</li>  
         <li>Name: ${chineseRestaurant.restaurant.name}</li>
         <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>  
@@ -90,3 +90,27 @@ fetch(urlSortonPrice, { headers: { "user-key": apiKey } })
       })
     })
   })
+
+
+fetch(urlSortOnRating, { headers: { "user-key": apiKey } })
+  .then(response => response.json())
+  .then(json => {
+    document.getElementById("sortOnRating").addEventListener('click', () => {
+      theRestaurantSection.innerHTML = ''
+      json.restaurants.forEach(chineseRestaurant => {
+
+        theRestaurantSection.innerHTML += ` 
+        <li>${renderImage(chineseRestaurant.restaurant)}</li>  
+        <li>Name: ${chineseRestaurant.restaurant.name}</li>
+        <li>Avarage cost for two: ${chineseRestaurant.restaurant.average_cost_for_two} ${chineseRestaurant.restaurant.currency}</li>  
+        <li>Address: ${chineseRestaurant.restaurant.location.address}</li>
+        <li>Rating: ${chineseRestaurant.restaurant.user_rating.aggregate_rating}/5 "${chineseRestaurant.restaurant.user_rating.rating_text}"</li>
+        <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
+        <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
+        <li> Table booking: ${chineseRestaurant.restaurant.has_table_booking}</li>
+      `
+
+      })
+    })
+  })
+
