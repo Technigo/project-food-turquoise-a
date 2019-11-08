@@ -11,10 +11,22 @@ const apiKey = "5ee55c33678b037bb059d0f847013cd6";
 const cityId = 257; //Rome
 const cuisineId = 25; //Chinese
 const resultQuantity = 20;
-
 const theRestaurantSection = document.getElementById("restaurant-section")
-
 const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityId}&entity_type=city&count=${resultQuantity}&cuisines=${cuisineId}`
+
+// SCROLL HEADER SECTION
+window.onscroll = function() { scrollFunction() };
+
+const header = document.getElementById("scrollHeader");
+const sticky = header.offsetTop;
+
+function scrollFunction() {
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+}
 
 renderImage = (restaurant) => {
     if (restaurant.photos && restaurant.photos.length > 0) {
