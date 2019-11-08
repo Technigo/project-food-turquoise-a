@@ -53,7 +53,6 @@ showBookingRestaurants = (restaurant) => {
     }
 }
 
-
 fetch(url, { headers: { "user-key": apiKey } })
     .then(response => response.json())
     .then(json => {
@@ -69,7 +68,6 @@ fetch(url, { headers: { "user-key": apiKey } })
   <li> Avarage price-range: ${rangeToDollar(chineseRestaurant.restaurant)}</li>
   <li> ${showDeliveryRestaurants(chineseRestaurant.restaurant)} online delivery</li>
   <li> ${showBookingRestaurants(chineseRestaurant.restaurant)} table booking</li>
-  
 `;
         });
     });
