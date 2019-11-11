@@ -138,3 +138,8 @@ fetch(urlSortOnRating, { headers: { "user-key": apiKey } })
       })
     })
   })
+//FUNCTION TO REFRESH THE PAGE
+const refresh = () => {
+  const reload = document.getElementById("reload")
+  reload = location = location
+}
