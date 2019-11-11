@@ -62,9 +62,12 @@ body{
 width: 90%;
 background: white;
 padding: 20px;
-border: solid black 2px;
+border: solid grey 2px;
+border-radius: 10px;
 margin: 5px;
-justify-content: center;
+display:flex;
+flex-direction: column;
+align-items: center;
 }
 
 .logo{
@@ -79,7 +82,7 @@ color: #555;
   flex-direction: column;
 }
 button{
-  border: 2px solid darkslategrey;
+  border: 2px solid grey;
   border-radius: 5px;
   margin: 10px;
   color: darkslategrey;
@@ -107,27 +110,33 @@ footer a{
   color:royalblue;
 }
 
-
-@media (min-width: 700px) and (max-width: 999px) {
+/*TABLET*/
+@media (min-width: 668px) and (max-width: 1024px){
   .card {
-      width: 30%;
+      width: 45%;
       height: 400px;
+      font-size: 14px;
   }
   #restaurant-section img {
-      max-width: 200px;
+      max-width: 250px;
       max-height: 200px;
   }
   #restaurant-section li {
-      width: 200px;
+      width: 250px;
   }
 }
 
-@media (min-width: 1000px) {
+/***DESKTOP***/
+@media (min-width: 1025px){
   .card {
-      width: 45%;
-      height: 550px;
+      width: 30%;
+      height: 430px;
   }
   #restaurant-section img {
-      max-height: 350px;
+      max-height: 200px;
+      max-width: 250px;
   }
+  #restaurant-section li {
+    width: 250px;
+}
 }
